@@ -23,24 +23,47 @@ const questions = [
 
 const interviewers = [
   {
-    id: "Ely",
-    name: "Ely",
+    id: "Melven",
+    name: "Melven",
     description: "Software Engineering",
     level: "L3",
+    code: "SE",
   },
   {
-    id: "Richard",
-    name: "Richard",
+    id: "Ely",
+    name: "Ely",
+    description: "Code Foundations",
+    level: "L2",
+    code: "CF",
+  },
+  {
+    id: "Jeremiah",
+    name: "Jeremiah",
+    description: "Logic Math",
+    level: "L1",
+    code: "LM",
+  },
+  {
+    id: "Ariessa",
+    name: "Ariessa",
     description: "Product Management",
     level: "L5",
+    code: "PM",
   },
   {
-    id: "Sarah",
-    name: "Sarah",
-    description: "Other",
+    id: "King",
+    name: "King",
+    description: "Quality Assurance",
     level: "L7",
+    code: "QA",
   },
 ];
+
+const question_bank = [
+  { code: "SE", question: "What is PERN stack?" },
+  { code: "QA", question: "What is Unit Testing?" },
+];
+
 
 const ffmpeg = createFFmpeg({
   // corePath: `http://localhost:3000/ffmpeg/dist/ffmpeg-core.js`,
@@ -77,10 +100,15 @@ export default function DemoPage() {
   const [completed, setCompleted] = useState(false);
   const [transcript, setTranscript] = useState("");
   const [generatedFeedback, setGeneratedFeedback] = useState("");
+  const [question, setQuestion] = useState("")
 
   useEffect(() => {
     setIsDesktop(window.innerWidth >= 768);
   }, []);
+
+  useEffect(() => {
+    setQuestion(question_bank.filter(item => item.code === selectedInterviewer.code).map(item => item.question)[0])
+  }, [selectedInterviewer]);
 
   useEffect(() => {
     if (videoEnded) {
@@ -192,15 +220,14 @@ export default function DemoPage() {
       formData.append("file", output, `${unique_id}.mp3`);
       formData.append("model", "whisper-1");
 
-      const question =
-        selected.name === "Behavioral"
-          ? `Tell me about yourself. Why don${`’`}t you walk me through your resume?`
-          : selectedInterviewer.name === "Ely"
-          ? "What is a Hash Table, and what is the average case and worst case time for each of its operations?"
-          : selectedInterviewer.name === "Richard"
-          ? "Uber is looking to expand its product line. Talk me through how you would approach this problem."
-          : "You have a 3-gallon jug and 5-gallon jug, how do you measure out exactly 4 gallons?";
-
+       // selected.code === "Behavioral"
+        //   ? `Tell me about yourself. Why don${`’`}t you walk me through your resume?`
+        //   : selectedInterviewer.name === "John"
+        //   ? "What is a Hash Table, and what is the average case and worst case time for each of its operations?"
+        //   : selectedInterviewer.name === "Richard"
+        //   ? "Uber is looking to expand its product line. Talk me through how you would approach this problem."
+        //   : "You have a 3-gallon jug and 5-gallon jug, how do you measure out exactly 4 gallons?";
+      console.log(question)
       setStatus("Transcribing");
 
       const upload = await fetch(
@@ -460,13 +487,7 @@ export default function DemoPage() {
               {recordingPermission ? (
                 <div className="w-full flex flex-col max-w-[1080px] mx-auto justify-center">
                   <h2 className="text-2xl font-semibold text-left text-[#1D2B3A] mb-2">
-                    {selected.name === "Behavioral"
-                      ? `Tell me about yourself. Why don${`’`}t you walk me through your resume?`
-                      : selectedInterviewer.name === "John"
-                      ? "What is a Hash Table, and what is the average case and worst case time for each of its operations?"
-                      : selectedInterviewer.name === "Richard"
-                      ? "Uber is looking to expand its product line. Talk me through how you would approach this problem."
-                      : "You have a 3-gallon jug and 5-gallon jug, how do you measure out exactly 4 gallons?"}
+                   {question}
                   </h2>
                   <span className="text-[14px] leading-[20px] text-[#1a2b3b] font-normal mb-4">
                     Asked by top companies like Google, Facebook and more
