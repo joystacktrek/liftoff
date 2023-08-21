@@ -1,5 +1,5 @@
-<a href="https://demo.useliftoff.com">
-  <img alt="Liftoff – AI-Powered Mock Interviews" src="https://demo.useliftoff.com/opengraph-image">
+<a href="https://stacktrek.com">
+  <img alt="Liftoff – AI-Powered Mock Interviews" src="https://stacktrek.com/assets/stacktrek-logo.png">
   <h1 align="center">Liftoff Interviews</h1>
 </a>
 
@@ -80,6 +80,9 @@ Liftoff uses FFmpeg to transcode the raw video into MP3. Chrome, Safari, and Fir
 
 We then send the audio directly to be transcribed by OpenAI's Whisper endpoint, and then stream feedback from the edge using OpenAI's gpt-3.5-turbo.
 
-## Author
+## Contributors
 
-- Tyler Meyer ([@tmeyer_me](https://twitter.com/tmeyer_me))
+- Joy Rubeth Padernal
+- Jeremiah Daniel Regalario ([@jed_deyn](https://twitter.com/jed_deyn))
+- Insert here
+- Insert here
